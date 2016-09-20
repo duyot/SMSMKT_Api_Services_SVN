@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd
+       http://cxf.apache.org/jaxrs
+       http://cxf.apache.org/schemas/jaxrs.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--REST-->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <!--SOAP-->
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <context:component-scan base-package="com.vivas.service.impl"/>
+
+    <!--SOAP-->
+    <jaxws:endpoint id="tcbService" implementor="com.vivas.service.impl.soap.TCBServiceImpl" address="/TCBService"/>
+    <!--<jaxws:endpoint id="tcbService" implementor="#tcbServiceRestImpl" address="/TCBService"/>-->
+
+    <!--REST-->
+    <jaxrs:server id="tcbServiceRest" address="/TCBServiceRest">
+        <jaxrs:serviceBeans>
+            <ref bean="tcbServiceRestImpl" />
+        </jaxrs:serviceBeans>
+        <!--add support for json return-->
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+        <!--logging-->
+        <jaxrs:features>
+            <cxf:logging/>
+        </jaxrs:features>
+    </jaxrs:server>
+
+    <bean id="tcbServiceRestImpl" class="com.vivas.service.impl.rest.TCBServiceRestImpl"/>
+
+
+</beans>

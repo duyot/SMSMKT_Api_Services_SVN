@@ -1,9 +1,6 @@
 package com.vivas.dto;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by duyot on 9/14/2016.
@@ -15,6 +12,9 @@ public class ReconcileRequest {
     private String MsgID;
     @XmlElement(name="Signature")
     private String Signature;
+
+    @XmlTransient
+    private String ip;
 
     public ReconcileRequest(String msgID, String signature) {
         MsgID = msgID;
@@ -40,11 +40,20 @@ public class ReconcileRequest {
         Signature = signature;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
     @Override
     public String toString() {
         return "ReconcileRequest{" +
                 "MsgID='" + MsgID + '\'' +
                 ", Signature='" + Signature + '\'' +
+                ", IP='" + ip + '\'' +
                 '}';
     }
 }

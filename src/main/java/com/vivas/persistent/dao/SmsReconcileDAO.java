@@ -35,6 +35,7 @@ public class SmsReconcileDAO {
         }
 
         for(ReconcileRequest i: lstReconcileRequests){
+            i.setIp(listReconcileRequest.getIp());
             ReconcileResponse reconcileResponse = smsReconcile(i);
             lstReconcileResponses.add(reconcileResponse);
         }
@@ -51,12 +52,13 @@ public class SmsReconcileDAO {
         ResultSet rs = null;
         ReconcileResponse reconcileResponse;
         try {
-            String smsReconcileSQL = "begin ?:=pkg_tcb_api.fSmsReconcile(?, ?); end;";
+            String smsReconcileSQL = "begin ?:=pkg_tcb_api.fSmsReconcile(?,?,?); end;";
             cstmt = connection.prepareCall(smsReconcileSQL);
             cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.VARCHAR);
 
-            cstmt.setString(2, reconcileRequest.getMsgID());
-            cstmt.setString(3, reconcileRequest.getSignature());
+            cstmt.setString(2, reconcileRequest.getIp());
+            cstmt.setString(3, reconcileRequest.getMsgID());
+            cstmt.setString(4, reconcileRequest.getSignature());
 
             cstmt.executeQuery();
 

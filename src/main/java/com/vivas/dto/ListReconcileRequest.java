@@ -3,6 +3,7 @@ package com.vivas.dto;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -13,6 +14,9 @@ public class ListReconcileRequest {
 
     @XmlElement(name="ReconcileRequest")
     List<ReconcileRequest> lstReconcileRequests;
+
+    @XmlTransient
+    private String ip;
 
     public ListReconcileRequest(List<ReconcileRequest> lstReconcileRequests) {
         this.lstReconcileRequests = lstReconcileRequests;
@@ -29,10 +33,19 @@ public class ListReconcileRequest {
         this.lstReconcileRequests = lstReconcileRequests;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
     @Override
     public String toString() {
         return "ListReconcileRequest{" +
                 "lstReconcileRequests=" + lstReconcileRequests +
+                "ip=" + ip +
                 '}';
     }
 }

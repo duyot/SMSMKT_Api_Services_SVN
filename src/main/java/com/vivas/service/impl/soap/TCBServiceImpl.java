@@ -35,12 +35,14 @@ public class TCBServiceImpl implements TCBService {
 
     @Override
     public ReconcileResponse SMSReconcile(ReconcileRequest reconcileRequest) {
+        reconcileRequest.setIp(FunctionUtils.getIPFromWebServiceContext(wsContext));
         SmsReconcileDAO smsReconcileDAO = new SmsReconcileDAO();
         return smsReconcileDAO.smsReconcile(reconcileRequest);
     }
 
     @Override
     public ListReconcileResponse SMSReconcileList(ListReconcileRequest listReconcileRequest) {
+        listReconcileRequest.setIp(FunctionUtils.getIPFromWebServiceContext(wsContext));
         SmsReconcileDAO smsReconcileDAO = new SmsReconcileDAO();
         return smsReconcileDAO.smsReconcileList(listReconcileRequest);
     }

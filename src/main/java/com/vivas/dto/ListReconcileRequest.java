@@ -28,4 +28,11 @@ public class ListReconcileRequest {
     public void setLstReconcileRequests(List<ReconcileRequest> lstReconcileRequests) {
         this.lstReconcileRequests = lstReconcileRequests;
     }
+
+    @Override
+    public String toString() {
+        return "ListReconcileRequest{" +
+                "lstReconcileRequests=" + lstReconcileRequests +
+                '}';
+    }
 }

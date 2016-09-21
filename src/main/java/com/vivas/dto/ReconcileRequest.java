@@ -39,4 +39,12 @@ public class ReconcileRequest {
     public void setSignature(String signature) {
         Signature = signature;
     }
+
+    @Override
+    public String toString() {
+        return "ReconcileRequest{" +
+                "MsgID='" + MsgID + '\'' +
+                ", Signature='" + Signature + '\'' +
+                '}';
+    }
 }

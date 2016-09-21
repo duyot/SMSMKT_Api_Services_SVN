@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by duyot on 9/16/2016.
@@ -29,4 +32,32 @@ public class DBUtils {
         }
         return null;
     }
+
+    public static void closeConnection(ResultSet rs, CallableStatement callableStatement,Connection connection){
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                log.error("Error: ", ex);
+            }
+        }
+        //
+        if(callableStatement != null){
+            try {
+                callableStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        //
+        if(connection != null){
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

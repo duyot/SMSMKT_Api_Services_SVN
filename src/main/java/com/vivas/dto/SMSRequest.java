@@ -1,9 +1,6 @@
 package com.vivas.dto;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by duyot on 9/12/2016.
@@ -11,6 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "SMSRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SMSRequest {
+    @XmlTransient
+    private String ip;
     @XmlElement(name="MsgID")
     private String MsgID;
     @XmlElement(name="Sender")
@@ -35,6 +34,24 @@ public class SMSRequest {
     private String Signature;
 
     public SMSRequest() {
+    }
+
+    @Override
+    public String toString() {
+        return "SMSRequest{" +
+                "MsgID='" + MsgID + '\'' +
+                ", IP='" + ip + '\'' +
+                ", Sender='" + Sender + '\'' +
+                ", Mobinumber='" + Mobinumber + '\'' +
+                ", MsgText='" + MsgText + '\'' +
+                ", MsgType='" + MsgType + '\'' +
+                ", MsgTime='" + MsgTime + '\'' +
+                ", MoID='" + MoID + '\'' +
+                ", Priority='" + Priority + '\'' +
+                ", LocalTime='" + LocalTime + '\'' +
+                ", Extension='" + Extension + '\'' +
+                ", Signature='" + Signature + '\'' +
+                '}';
     }
 
     public SMSRequest(String msgID, String sender, String mobinumber, String msgText, String msgType, String moID, String priority, String localTime, String extension, String signature) {
@@ -136,5 +153,13 @@ public class SMSRequest {
 
     public void setMsgTime(String msgTime) {
         MsgTime = msgTime;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

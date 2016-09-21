@@ -28,4 +28,11 @@ public class ListSMSResponse {
     public void setLstSMSmsResponses(List<SMSResponse> lstSMSmsResponses) {
         this.lstSMSmsResponses = lstSMSmsResponses;
     }
+
+    @Override
+    public String toString() {
+        return "ListSMSResponse{" +
+                "lstSMSmsResponses=" + lstSMSmsResponses +
+                '}';
+    }
 }

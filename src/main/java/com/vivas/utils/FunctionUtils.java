@@ -47,7 +47,7 @@ public class FunctionUtils {
             log.info("Invalid result from db result");
             return new ReconcileResponse();
         }
-        String[] resultArr = result.split("|");
+        String[] resultArr = result.split("\\|");
         return new ReconcileResponse(resultArr[0],resultArr[1],resultArr[2],resultArr[3],resultArr[4]);
     }
 

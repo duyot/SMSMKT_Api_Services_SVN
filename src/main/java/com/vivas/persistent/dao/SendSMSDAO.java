@@ -1,12 +1,12 @@
 package com.vivas.persistent.dao;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.vivas.dto.ListSMSRequest;
 import com.vivas.dto.ListSMSResponse;
 import com.vivas.dto.SMSRequest;
 import com.vivas.dto.SMSResponse;
 import com.vivas.persistent.DBUtils;
+import com.vivas.utils.BundleUtils;
 import com.vivas.utils.FunctionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,21 @@ import java.sql.ResultSet;
 import java.util.List;
 
 /**
- * Created by duyot on 9/21/2016.
+ * Created by duyot on 9/21/2016.c
  */
 public class SendSMSDAO {
-    Logger log = LoggerFactory.getLogger(SendSMSDAO.class);
+    public static Logger log = LoggerFactory.getLogger(SendSMSDAO.class);
+    public static final String SIGNATURE_KEY = BundleUtils.getkey("SIGNATURE_KEY");
 
     public SendSMSDAO() {
+    }
+
+    public static void testlog(){
+       log.info("sdfsdf");
+    }
+
+    public static void main(String[] args) {
+        SendSMSDAO.testlog();
     }
 
     public ListSMSResponse sendListSMS(ListSMSRequest mtList){
@@ -44,7 +53,7 @@ public class SendSMSDAO {
             lstSMSmsResponses.add(smsResponse);
         }
         lstSMSmsResponse.setLstSMSmsResponses(lstSMSmsResponses);
-        log.info(lstSMSmsResponse.toString());
+//        log.info(lstSMSmsResponse.toString());
         return lstSMSmsResponse;
 
     }
@@ -76,9 +85,17 @@ public class SendSMSDAO {
             cstmt.executeQuery();
 
             String sendSMSResult = cstmt.getString(1);
-            log.info("Request result: "+ sendSMSResult);
 
-            return FunctionUtils.getResponseFromResult(sendSMSResult);
+            String signature = mt.getMsgID() + "|" + mt.getSender() + "|" + mt.getMobinumber() + "|" +
+                    mt.getMsgText() + "|" + mt.getMsgType() + "|" + mt.getMsgTime() + "|" + mt.getMoID() + "|" + mt.getPriority() + "|"
+                    + mt.getLocalTime() + "|" + mt.getExtension() + "|" + SIGNATURE_KEY;
+            String encryptedSignature = FunctionUtils.MD5Encrypt(signature);
+
+            log.info("Request result: "+ sendSMSResult);
+            log.info("Signature: "+ signature);
+            log.info("-----------------------------------");
+
+            return FunctionUtils.getResponseFromResult(sendSMSResult,encryptedSignature);
         } catch (Exception e) {
             log.error("Error: ", e);
             return FunctionUtils.genErroResult(mt.getMsgID(),"-1","error", mt.getSignature());

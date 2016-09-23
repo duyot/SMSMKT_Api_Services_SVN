@@ -70,4 +70,15 @@ public class ReconcileResponse {
     public void setRespCode(String respCode) {
         RespCode = respCode;
     }
+
+    @Override
+    public String toString() {
+        return "ReconcileResponse{" +
+                "MsgID='" + MsgID + '\'' +
+                ", MsgLen='" + MsgLen + '\'' +
+                ", MsgCount='" + MsgCount + '\'' +
+                ", Signature='" + Signature + '\'' +
+                ", RespCode='" + RespCode + '\'' +
+                '}';
+    }
 }

@@ -64,6 +64,7 @@ public class SmsReconcileDAO {
 
             String smsReconcileResult = cstmt.getString(1);
             log.info("Request result: "+ smsReconcileResult);
+            log.info("---------------------------------------");
 
             return FunctionUtils.getReconcileResponseFromResult(smsReconcileResult);
         } catch (Exception e) {

@@ -61,4 +61,14 @@ public class SMSResponse {
     public void setSignature(String signature) {
         Signature = signature;
     }
+
+    @Override
+    public String toString() {
+        return "SMSResponse{" +
+                "MsgID='" + MsgID + '\'' +
+                ", RespCode='" + RespCode + '\'' +
+                ", RespDesc='" + RespDesc + '\'' +
+                ", Signature='" + Signature + '\'' +
+                '}';
+    }
 }

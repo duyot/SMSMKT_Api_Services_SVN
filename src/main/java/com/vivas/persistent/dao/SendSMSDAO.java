@@ -26,14 +26,6 @@ public class SendSMSDAO {
     public SendSMSDAO() {
     }
 
-    public static void testlog(){
-       log.info("sdfsdf");
-    }
-
-    public static void main(String[] args) {
-        SendSMSDAO.testlog();
-    }
-
     public ListSMSResponse sendListSMS(ListSMSRequest mtList){
         log.info("Request info: "+ mtList.toString());
         ListSMSResponse lstSMSmsResponse = new ListSMSResponse();
@@ -52,8 +44,8 @@ public class SendSMSDAO {
             SMSResponse smsResponse = sendSMS(i);
             lstSMSmsResponses.add(smsResponse);
         }
+
         lstSMSmsResponse.setLstSMSmsResponses(lstSMSmsResponses);
-//        log.info(lstSMSmsResponse.toString());
         return lstSMSmsResponse;
 
     }
@@ -86,9 +78,11 @@ public class SendSMSDAO {
 
             String sendSMSResult = cstmt.getString(1);
 
-            String signature = mt.getMsgID() + "|" + mt.getSender() + "|" + mt.getMobinumber() + "|" +
-                    mt.getMsgText() + "|" + mt.getMsgType() + "|" + mt.getMsgTime() + "|" + mt.getMoID() + "|" + mt.getPriority() + "|"
-                    + mt.getLocalTime() + "|" + mt.getExtension() + "|" + SIGNATURE_KEY;
+            String signature = mt.getMsgID()    + "|" + mt.getSender()  + "|" + mt.getMobinumber() + "|" +
+                               mt.getMsgText()  + "|" + mt.getMsgType() + "|" + mt.getMsgTime()    + "|" +
+                               mt.getMoID()     + "|" + mt.getPriority()+ "|" + mt.getLocalTime()  + "|" +
+                               mt.getExtension()+ "|" + SIGNATURE_KEY;
+
             String encryptedSignature = FunctionUtils.MD5Encrypt(signature);
 
             log.info("Request result: "+ sendSMSResult);

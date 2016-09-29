@@ -57,7 +57,7 @@ public class FunctionUtils {
 
     public static SMSResponse getResponseFromResult(String result,String encryptedSignature){
         if(Strings.isNullOrEmpty(result)){
-            log.info("Invalid result from db result");
+            log.info("Invalid result from db");
             return new SMSResponse();
         }
         String[] resultArr = result.split("\\|");
@@ -66,7 +66,7 @@ public class FunctionUtils {
 
     public static ReconcileResponse getReconcileResponseFromResult(String result){
         if(Strings.isNullOrEmpty(result)){
-            log.info("Invalid result from db result");
+            log.info("Invalid result from db");
             return new ReconcileResponse();
         }
         String[] resultArr = result.split("\\|");

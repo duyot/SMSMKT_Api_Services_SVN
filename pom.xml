@@ -25,6 +25,12 @@
     </properties>
 
     <dependencies>
+        <!--ojdbc-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+        </dependency>
         <!--cxf service-->
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -111,7 +117,6 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
-
     </dependencies>
     
 </project>

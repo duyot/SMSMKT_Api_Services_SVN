@@ -31,6 +31,10 @@ public interface TCBService {
     @WebResult(name = "SMSReconcileListResult")
     public ListReconcileResponse SMSReconcileList(@WebParam(name = "Msg")ListReconcileRequest listReconcileRequest);
 
+    @WebMethod(operationName = "UpdateMsgType")
+    @WebResult(name = "UpdateMsgTypeResult")
+    public UpdateMsgTypeResult updateMsgType(@WebParam(name = "rMsgType")MsgType msgType);
+
 
 
 //    @WebMethod(operationName = "getUser")

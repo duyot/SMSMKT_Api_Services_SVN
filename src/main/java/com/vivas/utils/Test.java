@@ -66,7 +66,7 @@ public class Test {
         testSMSRequest.setMsgType("addfdf");
         testSMSRequest.setMobinumber("addfdf");
         testSMSRequest.setMoID("addfdf");
-        testSMSRequest.setPriority("addfdf");
+        testSMSRequest.setPriority(1);
         testSMSRequest.setMsgTime("addfdf");
         testSMSRequest.setExtension("addfdf");
         Test.testWithString(testSMSRequest);

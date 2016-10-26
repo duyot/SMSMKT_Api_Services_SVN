@@ -3,6 +3,7 @@ package com.vivas.service.impl.rest;
 import com.vivas.dto.*;
 import com.vivas.persistent.DBUtils;
 import com.vivas.service.interfaces.TCBService;
+import org.springframework.context.annotation.Scope;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -50,6 +51,11 @@ public class TCBServiceRestImpl implements TCBService {
 
     @Override
     public ListReconcileResponse SMSReconcileList(ListReconcileRequest listReconcileRequest) {
+        return null;
+    }
+
+    @Override
+    public UpdateMsgTypeResult updateMsgType(MsgType msgType) {
         return null;
     }
 }

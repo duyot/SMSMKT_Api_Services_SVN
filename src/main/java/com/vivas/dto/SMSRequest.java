@@ -25,7 +25,7 @@ public class SMSRequest {
     @XmlElement(name="MoID")
     private String MoID;
     @XmlElement(name="Priority")
-    private String Priority;
+    private int Priority;
     @XmlElement(name="LocalTime")
     private String LocalTime;
     @XmlElement(name="Extension")
@@ -54,7 +54,7 @@ public class SMSRequest {
                 '}';
     }
 
-    public SMSRequest(String msgID, String sender, String mobinumber, String msgText, String msgType, String moID, String priority, String localTime, String extension, String signature) {
+    public SMSRequest(String msgID, String sender, String mobinumber, String msgText, String msgType, String moID, int priority, String localTime, String extension, String signature) {
         MsgID = msgID;
         Sender = sender;
         Mobinumber = mobinumber;
@@ -115,11 +115,11 @@ public class SMSRequest {
         MoID = moID;
     }
 
-    public String getPriority() {
+    public int getPriority() {
         return Priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         Priority = priority;
     }
 

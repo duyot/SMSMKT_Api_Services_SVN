@@ -69,7 +69,7 @@ public class SendSMSDAO {
             cstmt.setString(7, mt.getMsgType());
             cstmt.setString(8, mt.getMsgTime());
             cstmt.setString(9, mt.getMoID());
-            cstmt.setString(10, mt.getPriority());
+            cstmt.setString(10, mt.getPriority()+"");
             cstmt.setString(11, mt.getLocalTime());
             cstmt.setString(12, mt.getExtension());
             cstmt.setString(13, mt.getSignature());
@@ -83,12 +83,6 @@ public class SendSMSDAO {
             sbSignature.append(mt.getMsgText()).  append("|").append(mt.getMsgType()). append("|").append(mt.getMobinumber()).append("|");
             sbSignature.append(mt.getMoID()).     append("|").append(mt.getPriority()).append("|").append(mt.getMsgTime()).   append("|");
             sbSignature.append(mt.getExtension()).append("|").append(SIGNATURE_KEY);
-
-
-//            String signature = mt.getMsgID()    + "|" + mt.getSender()  + "|" + mt.getMobinumber() + "|" +
-//                               mt.getMsgText()  + "|" + mt.getMsgType() + "|" + mt.getMsgTime()    + "|" +
-//                               mt.getMoID()     + "|" + mt.getPriority()+ "|" + mt.getLocalTime()  + "|" +
-//                               mt.getExtension()+ "|" + SIGNATURE_KEY;
 
             String encryptedSignature = FunctionUtils.MD5Encrypt(sbSignature.toString());
 

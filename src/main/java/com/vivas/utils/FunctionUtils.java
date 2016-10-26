@@ -3,6 +3,7 @@ package com.vivas.utils;
 import com.google.common.base.Strings;
 import com.vivas.dto.ReconcileResponse;
 import com.vivas.dto.SMSResponse;
+import com.vivas.dto.UpdateMsgTypeResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +62,11 @@ public class FunctionUtils {
             return new SMSResponse();
         }
         String[] resultArr = result.split("\\|");
-        return new SMSResponse(resultArr[0],resultArr[1],resultArr[2],encryptedSignature);
+        if(resultArr.length >=3){
+            return new SMSResponse(resultArr[0],resultArr[1],resultArr[2],encryptedSignature);
+        }else{
+            return new SMSResponse("",resultArr[0],resultArr[1],encryptedSignature);
+        }
     }
 
     public static ReconcileResponse getReconcileResponseFromResult(String result){
@@ -70,7 +75,21 @@ public class FunctionUtils {
             return new ReconcileResponse();
         }
         String[] resultArr = result.split("\\|");
-        return new ReconcileResponse(resultArr[0],resultArr[1],resultArr[2],resultArr[3],resultArr[4]);
+        int msgLeng;
+        int msgCount;
+        try{
+            msgLeng = Integer.parseInt(resultArr[1]);
+        }catch(Exception e){
+            log.error(e.toString());
+            msgLeng = 0;
+        }
+        try{
+            msgCount = Integer.parseInt(resultArr[2]);
+        }catch(Exception e){
+            log.error(e.toString());
+            msgCount = 0;
+        }
+        return new ReconcileResponse(resultArr[0],msgLeng,msgCount,resultArr[3],resultArr[4]);
     }
 
     public static SMSResponse genErroResult(String messageId,String respCode,String respDesc,String signature){
@@ -78,6 +97,23 @@ public class FunctionUtils {
     }
 
     public static ReconcileResponse genReconcileErroResult(String messageId,String signature){
-        return new ReconcileResponse(messageId,"0","0",signature,"999");
+        return new ReconcileResponse(messageId,0,0,signature,"999");
+    }
+
+    public static UpdateMsgTypeResult initUpdateMsgtype(String result,String encryptedSignature){
+        if(Strings.isNullOrEmpty(result)){
+            log.info("Invalid result from db");
+            return new UpdateMsgTypeResult();
+        }
+        String[] resultArr = result.split("\\|");
+        UpdateMsgTypeResult updateMsgTypeResult;
+        try {
+            updateMsgTypeResult =  new UpdateMsgTypeResult(resultArr[0],resultArr[1],resultArr[2],Integer.parseInt(resultArr[3]),encryptedSignature,resultArr[5],resultArr[6]);
+        } catch (Exception e) {
+            log.info("Parse result form DB error:"+ e.toString());
+            e.printStackTrace();
+            updateMsgTypeResult =  new UpdateMsgTypeResult(resultArr[0],resultArr[1],resultArr[2],Integer.parseInt(resultArr[3]),encryptedSignature,"-1","parse result error");
+        }
+        return updateMsgTypeResult;
     }
 }

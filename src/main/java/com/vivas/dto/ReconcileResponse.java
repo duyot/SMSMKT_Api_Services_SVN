@@ -12,15 +12,15 @@ public class ReconcileResponse {
     @XmlElement(name="MsgID")
     private String MsgID;
     @XmlElement(name="MsgLen")
-    private String MsgLen;
+    private int MsgLen;
     @XmlElement(name="MsgCount")
-    private String MsgCount;
+    private int MsgCount;
     @XmlElement(name="Signature")
     private String Signature;
     @XmlElement(name="RespCode")
     private String RespCode;
 
-    public ReconcileResponse(String msgID, String msgLen, String msgCount, String signature, String respCode) {
+    public ReconcileResponse(String msgID, int msgLen, int msgCount, String signature, String respCode) {
         MsgID = msgID;
         MsgLen = msgLen;
         MsgCount = msgCount;
@@ -39,19 +39,19 @@ public class ReconcileResponse {
         MsgID = msgID;
     }
 
-    public String getMsgLen() {
+    public int getMsgLen() {
         return MsgLen;
     }
 
-    public void setMsgLen(String msgLen) {
+    public void setMsgLen(int msgLen) {
         MsgLen = msgLen;
     }
 
-    public String getMsgCount() {
+    public int getMsgCount() {
         return MsgCount;
     }
 
-    public void setMsgCount(String msgCount) {
+    public void setMsgCount(int msgCount) {
         MsgCount = msgCount;
     }
 

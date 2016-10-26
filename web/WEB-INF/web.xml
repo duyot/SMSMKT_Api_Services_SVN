@@ -8,6 +8,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             WEB-INF/service_bean.xml
+            <!--classpath:-->
         </param-value>
     </context-param>
 
